@@ -7,6 +7,7 @@
 #include "DrawDebugHelpers.h"
 #include "SInteractionComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "SAttributeComponent.h"
 // Sets default values
 ASCharacter::ASCharacter()
 {
@@ -21,6 +22,8 @@ ASCharacter::ASCharacter()
 	CameraComp->SetupAttachment(SpringArmComp);
 	
 	InteractionComp = CreateDefaultSubobject<USInteractionComponent>("InteractionComp");	
+	
+	AttributeComp = CreateDefaultSubobject<USAttributeComponent>("AttributeComp");
 	
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 
@@ -117,8 +120,6 @@ void ASCharacter::PrimaryAttack_TimeElapsed()
 		SpawnParams.Instigator = this;
 		GetWorld()->SpawnActor<AActor>(ProjectileClass, SpawnTM, SpawnParams);
 	}
-	 
-	
 }
 
 void ASCharacter::PrimaryInteract()

@@ -22,9 +22,19 @@ protected:
 	TSubclassOf<AActor> ProjectileClass;
 	
 	UPROPERTY(EditAnywhere, Category = "Attack")
+	TSubclassOf<AActor> BlackholeProjectileClass;
+	
+	UPROPERTY(EditAnywhere, Category = "Teleport")
+	TSubclassOf<AActor> DashProjectileClass;
+	
+	UPROPERTY(EditAnywhere, Category = "Attack")
 	UAnimMontage* AttackAnim;
 	
 	FTimerHandle TimerHandle_PrimaryAttack;
+	FTimerHandle TimerHandle_SecondaryAttack;
+	FTimerHandle TimerHandle_Dash;
+
+	float AttackAnimDelay = 0.2f;
 	
 	
 public:
@@ -54,6 +64,11 @@ protected:
 	void PrimaryAttack();
 	void PrimaryAttack_TimeElapsed();
 	void PrimaryInteract();
+	void BlackholeAttack();
+	void BlackholeAttack_TimeElapsed();
+	void SpawnProjectile(TSubclassOf<AActor> ClassToSpawn);
+	void Dash();
+	void Dash_TimeElapsed();
 	
 public:	
 	// Called every frame

@@ -30,6 +30,8 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Attack")
 	UAnimMontage* AttackAnim;
 	
+	
+	
 	FTimerHandle TimerHandle_PrimaryAttack;
 	FTimerHandle TimerHandle_SecondaryAttack;
 	FTimerHandle TimerHandle_Dash;
@@ -70,6 +72,10 @@ protected:
 	void Dash();
 	void Dash_TimeElapsed();
 	
+	UFUNCTION()
+	void OnHealthChanged(AActor* InstigatorActor, USAttributeComponent* OwningComp, float NewHealth, float Delta);
+	
+	virtual void PostInitializeComponents() override;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

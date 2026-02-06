@@ -11,6 +11,7 @@ class USpringArmComponent;
 class USInteractionComponent;
 class UAnimMontage;
 class USAttributeComponent;
+class UParticleSystem;
 UCLASS()
 class ACTIONROGUELIKE_API ASCharacter : public ACharacter
 {
@@ -18,6 +19,12 @@ class ACTIONROGUELIKE_API ASCharacter : public ACharacter
 
 
 protected:
+	UPROPERTY(VisibleAnywhere, Category = "Effects")
+	FName TimeToHitParamName;
+	
+	UPROPERTY(VisibleAnywhere, Category = "Effects")
+	FName HandSocketName;
+	
 	UPROPERTY(EditAnywhere, Category = "Attack")
 	TSubclassOf<AActor> ProjectileClass;
 	
@@ -30,7 +37,8 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Attack")
 	UAnimMontage* AttackAnim;
 	
-	
+	UPROPERTY(EditAnywhere, Category = "Attack")
+	UParticleSystem* CastingEffect;
 	
 	FTimerHandle TimerHandle_PrimaryAttack;
 	FTimerHandle TimerHandle_SecondaryAttack;
@@ -71,6 +79,7 @@ protected:
 	void SpawnProjectile(TSubclassOf<AActor> ClassToSpawn);
 	void Dash();
 	void Dash_TimeElapsed();
+	void StartAttackEffects();
 	
 	UFUNCTION()
 	void OnHealthChanged(AActor* InstigatorActor, USAttributeComponent* OwningComp, float NewHealth, float Delta);

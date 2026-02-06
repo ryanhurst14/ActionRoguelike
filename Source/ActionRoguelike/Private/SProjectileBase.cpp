@@ -8,6 +8,10 @@
 #include "Kismet/GameplayStatics.h"
 #include "Components/AudioComponent.h"
 #include "Sound/SoundCue.h"
+#include "Components/AudioComponent.h"
+#include "Sound/SoundCue.h"
+#include "Camera/CameraShakeBase.h"
+
 // Sets default values
 ASProjectileBase::ASProjectileBase()
 {
@@ -27,6 +31,9 @@ ASProjectileBase::ASProjectileBase()
 	
 	AudioComp = CreateDefaultSubobject<UAudioComponent>("AudioComp");
 	AudioComp->SetupAttachment(RootComponent);
+	
+	ImpactShakeInnerRadius = 250.0f;
+	ImpactShakeOuterRadius = 2500.0f;
 
 }
 
@@ -41,6 +48,8 @@ void ASProjectileBase::Explode_Implementation()
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(this, ImpactVFX, GetActorLocation(), GetActorRotation());
 		UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation());
+		
+		UGameplayStatics::PlayWorldCameraShake(this, ImpactShake, GetActorLocation(), ImpactShakeInnerRadius, ImpactShakeOuterRadius);
 		Destroy();
 		
 	}

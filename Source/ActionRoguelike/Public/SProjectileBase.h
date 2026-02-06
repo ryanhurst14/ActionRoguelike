@@ -11,6 +11,8 @@ class UProjectileMovementComponent;
 class UParticleSystemComponent;
 class UAudioComponent;
 class USoundCue;
+class UCameraShakeBase;
+
 
 UCLASS(ABSTRACT)
 class ACTIONROGUELIKE_API ASProjectileBase : public AActor
@@ -18,6 +20,16 @@ class ACTIONROGUELIKE_API ASProjectileBase : public AActor
 	GENERATED_BODY()
 	
 protected:
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Effects|Shake")
+	TSubclassOf<UCameraShakeBase> ImpactShake;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Effects|Shake")
+	float ImpactShakeInnerRadius;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Effects|Shake")
+	float ImpactShakeOuterRadius;
+	
 	UPROPERTY(EditDefaultsOnly, Category = "Effects")
 	UParticleSystem* ImpactVFX;
 	
